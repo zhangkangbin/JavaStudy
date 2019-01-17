@@ -12,14 +12,6 @@ import java.lang.reflect.Proxy;
  */
 public class ProxyUtil<T> {
 
-    static ProxyUtil proxyUtil = new ProxyUtil();
-
-    public static ProxyUtil get() {
-
-        return proxyUtil;
-    }
-
-
     public T getProxy(Class cls,Object target) {
         return (T) Proxy.newProxyInstance(cls.getClassLoader(),
                 new Class[]{cls},
