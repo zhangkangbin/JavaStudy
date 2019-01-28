@@ -10,9 +10,9 @@ import java.lang.reflect.Proxy;
  * Date: 2019/1/17 0017
  * Time: 下午 3:54
  */
-public class ProxyUtil<T> {
+public class ProxyUtil {
 
-    public T getProxy(Class cls,Object target) {
+    public <T> T getProxy(Class cls,Object target) {
         return (T) Proxy.newProxyInstance(cls.getClassLoader(),
                 new Class[]{cls},
                 new InvocationHandler() {

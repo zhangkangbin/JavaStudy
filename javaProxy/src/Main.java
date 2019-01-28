@@ -1,6 +1,7 @@
 import com.z.proxy.*;
 
 import java.lang.reflect.Proxy;
+import java.util.HashMap;
 
 /**
  * @author zhangkb
@@ -27,8 +28,16 @@ public class Main {
 
         System.out.println("------------匿名代理------------");
 
-        ProxyUtil<IUser> proxyUtil=new ProxyUtil<>();
-        proxyUtil.getProxy(IUser.class,new My()).findGirl();
+        ProxyUtil proxyUtil=new ProxyUtil();
+        proxyUtil.<IUser>getProxy(IUser.class,new My()).findGirl();
+
+
+        HashMap<String,String> hashMap=new HashMap<>(2);
+        hashMap.get("");
+        hashMap.put("","");
+
+        System.out.println("------------匿名代理------------"+(3 << 3));
+
 
     }
 
