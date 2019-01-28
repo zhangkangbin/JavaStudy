@@ -1,3 +1,5 @@
+package com.z.proxy;
+
 import com.z.proxy.*;
 
 import java.lang.reflect.Proxy;
