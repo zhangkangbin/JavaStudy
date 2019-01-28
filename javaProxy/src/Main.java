@@ -32,11 +32,6 @@ public class Main {
         proxyUtil.<IUser>getProxy(IUser.class,new My()).findGirl();
 
 
-        HashMap<String,String> hashMap=new HashMap<>(2);
-        hashMap.get("");
-        hashMap.put("","");
-
-        System.out.println("------------匿名代理------------"+(3 << 3));
 
 
     }
