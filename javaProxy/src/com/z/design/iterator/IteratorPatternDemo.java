@@ -12,15 +12,15 @@ import java.util.List;
  * User: zhangkb
  * Date: 2019/5/14 0014
  * Time: 下午 4:51
+ * @author zhangkb
  */
 public class IteratorPatternDemo {
     public static void main(String[] args) {
 
-
         List<String> list = new ArrayList<>();
         list.add("A");
         list.add("B");
-        list.iterator().next();
+
         //模仿list迭代
         MyList<String> myList = new MyList<>(list);
         Iterator<String> iterator = myList.getIterator();
