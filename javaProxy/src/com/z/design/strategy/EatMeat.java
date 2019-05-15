@@ -1,25 +1,23 @@
-package com.z.strategy;
+package com.z.design.strategy;
 
 /**
  * User: zhangkb
  * Date: 2019/4/24 0024
- * Time: 上午 9:50
- *
- * @author zhangkb
+ * Time: 上午 9:51
  */
-public class EatFruits implements Eat {
+public class EatMeat implements Eat {
     @Override
     public void eatSomething() {
 
         switch (action) {
-            case "banana":
-                System.out.println("I usually eat banana");
+            case "beef":
+                System.out.println("I usually eat beef");
                 break;
-            case "pear":
-                System.out.println("I usually eat pear");
+            case "chicken":
+                System.out.println("I usually eat chicken");
                 break;
             default:
-                System.out.println("I usually eat fruits.....");
+                System.out.println("I usually eat meat");
                 break;
         }
 
@@ -28,6 +26,10 @@ public class EatFruits implements Eat {
 
     private String action;
 
+    /**
+     * set action
+     * @param action
+     */
     @Override
     public void setAction(String action) {
         this.action = action;
@@ -35,6 +37,6 @@ public class EatFruits implements Eat {
 
     @Override
     public int getType() {
-        return 1;
+        return 2;
     }
 }

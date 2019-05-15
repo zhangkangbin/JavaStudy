@@ -1,4 +1,4 @@
-package com.z.strategy;
+package com.z.design.strategy;
 
 /**
  * User: zhangkb
