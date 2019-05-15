@@ -1,4 +1,4 @@
-package com.z.interceptor;
+package com.z.design.interceptor;
 
 /**
  * User: zhangkb
@@ -8,14 +8,11 @@ package com.z.interceptor;
 public class SubInterceptor implements Interceptor {
     @Override
     public MyResult interceptor(Chain chain) {
+        System.out.println("next--："+chain.getNext());
 
         MyResult myResult = chain.request();
-
-        System.out.println("SubInterceptor:"+myResult.getName());
-
-        myResult.setName("SubInterceptor");
-
-
+        myResult.setName(myResult.getName()+"--SubInterceptor");
+      //  System.out.println("SubInterceptor:"+myResult.getName());
 
         return chain.proceed(myResult);
     }

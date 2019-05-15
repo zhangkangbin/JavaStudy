@@ -1,4 +1,4 @@
-package com.z.interceptor;
+package com.z.design.interceptor;
 
 /**
  * User: zhangkb

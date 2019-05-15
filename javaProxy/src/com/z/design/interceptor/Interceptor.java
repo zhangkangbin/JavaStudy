@@ -1,6 +1,4 @@
-package com.z.interceptor;
-
-import java.io.IOException;
+package com.z.design.interceptor;
 
 /**
  * User: zhangkb
@@ -15,6 +13,7 @@ public interface Interceptor {
 
         MyResult request();
         MyResult proceed(MyResult request);
+        int getNext();
 
     }
 }
