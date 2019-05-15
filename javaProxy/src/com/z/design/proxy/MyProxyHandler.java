@@ -1,4 +1,4 @@
-package com.z.proxy;
+package com.z.design.proxy;
 
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
