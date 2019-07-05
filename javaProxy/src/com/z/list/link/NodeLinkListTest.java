@@ -7,6 +7,7 @@ import java.util.LinkedList;
  * Date: 2019/7/5 0005
  * Time: 上午 9:28
  *
+ * 单链表实现
  * @author zhangkb
  */
 public class NodeLinkListTest {
@@ -38,9 +39,8 @@ public class NodeLinkListTest {
         System.out.println(linkList.findNode("C"));
 
 
-        LinkedList<String> linkedList=new LinkedList<>();
-
-        linkedList.remove("A");
+     /*   LinkedList<String> linkedList=new LinkedList<>();
+        linkedList.remove("A");*/
 
 
     }
