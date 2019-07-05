@@ -2,6 +2,7 @@ package com.z.asm;
 
 import jdk.internal.org.objectweb.asm.*;
 import jdk.internal.org.objectweb.asm.commons.AdviceAdapter;
+import jdk.internal.org.objectweb.asm.signature.SignatureVisitor;
 
 /**
  * User: zhangkb
@@ -17,7 +18,7 @@ public class ScanClassVisitor extends ClassVisitor {
 
     @Override
     public MethodVisitor visitMethod(int access, String name, String desc, String s2, String[] strings) {
-        System.out.println("--visitMethod");
+        System.out.println("--visitMethod name---:"+name);
         MethodVisitor methodVisitor = super.visitMethod(access, name, desc, s2, strings);
 
         return new MyAdviceAdapter(Opcodes.ASM5, methodVisitor, access, name, desc);
@@ -35,6 +36,12 @@ public class ScanClassVisitor extends ClassVisitor {
         super.visitEnd();
     }
 
+    class  MySignatureVisitor extends SignatureVisitor{
+
+        public MySignatureVisitor(int i) {
+            super(i);
+        }
+    }
     class MyAdviceAdapter extends AdviceAdapter {
 
         protected MyAdviceAdapter(int i, MethodVisitor methodVisitor, int i1, String s, String s1) {
@@ -55,6 +62,16 @@ public class ScanClassVisitor extends ClassVisitor {
 
 
             return super.visitAnnotation(s, b);
+        }
+
+        @Override
+        public void visitCode() {
+            super.visitCode();
+        }
+
+        @Override
+        public AnnotationVisitor visitTryCatchAnnotation(int i, TypePath typePath, String s, boolean b) {
+            return super.visitTryCatchAnnotation(i, typePath, s, b);
         }
 
         @Override
@@ -98,7 +115,7 @@ public class ScanClassVisitor extends ClassVisitor {
             mv.visitMethodInsn(INVOKESPECIAL, "java/lang/StringBuilder", "<init>", "()V", false);
             mv.visitLdcInsn("-------cost time:----------");
             mv.visitMethodInsn(INVOKEVIRTUAL, "java/lang/StringBuilder", "append", "(Ljava/lang/String;)Ljava/lang/StringBuilder;", false);
-            mv.visitVarInsn(LLOAD, 3);
+            mv.visitVarInsn(Opcodes.LLOAD, 3);
             mv.visitVarInsn(LLOAD, startTime);
             mv.visitInsn(LSUB);
             mv.visitMethodInsn(INVOKEVIRTUAL, "java/lang/StringBuilder", "append", "(J)Ljava/lang/StringBuilder;", false);

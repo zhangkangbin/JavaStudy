@@ -1,7 +1,6 @@
 package com.z.asm;
 
 
-
 /**
  * User: zhangkb
  * Date: 2019/5/21 0021
@@ -9,17 +8,13 @@ package com.z.asm;
  */
 
 public class Test {
-
+    String _start = "_start";
     @MyInjection
-    public void test1(){
+    public void test1() {
 
-        System.out.println("-------test time:----------");
-
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        int _test = 11;
+        String _test2 = "_test2";
+        System.out.println(_test);
 
     }
 
