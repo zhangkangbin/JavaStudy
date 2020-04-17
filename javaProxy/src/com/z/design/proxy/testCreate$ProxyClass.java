@@ -10,7 +10,10 @@ import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
 import java.lang.reflect.UndeclaredThrowableException;
+public final class testCreate$ProxyClass  {
 
+}
+/*
 public final class testCreate$ProxyClass extends Proxy implements IUser {
     private static Method m1;
     private static Method m2;
@@ -75,3 +78,4 @@ public final class testCreate$ProxyClass extends Proxy implements IUser {
         }
     }
 }
+*/

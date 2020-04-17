@@ -42,6 +42,8 @@ public class Main {
          * {@link (testCreate$ProxyClass)}
          * #模拟生成一个class ，参考 @ testCreate$ProxyClass ，这个类是反编译后复制到这里的。
          */
+
+
         ProxyUtil.createClass(my.getClass().getInterfaces());
 
 
