@@ -31,11 +31,11 @@ public class MyProxyHandler<T> implements InvocationHandler {
     @Override
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
 
-        System.out.println("start:我该做点什么？");
+        System.out.println("动态代理 start:我该做点什么？");
 
         Object result = method.invoke(objectProxy, args);
 
-        System.out.println("end:我该做点什么？");
+        System.out.println("动态代理 end:我该做点什么？");
         return result;
     }
 }
