@@ -12,5 +12,10 @@ public class My implements IUser {
         System.out.println("佛系寻找：你若盛开，清风自来。");
     }
 
+    @Override
+    public void findBoy() {
+        System.out.println("boy 佛系寻找：你若盛开，清风自来。");
+    }
+
 
 }

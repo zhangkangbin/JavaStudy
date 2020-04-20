@@ -16,7 +16,13 @@ import java.lang.reflect.Proxy;
  */
 public class ProxyUtil {
 
-    public <T> T getProxy(Class cls, Object target) {
+    /**
+     * 模仿 Retrofit
+     * @param cls
+     * @param <T>
+     * @return
+     */
+    public <T> T getProxy(final  Class<T> cls) {
 
         return (T) Proxy.newProxyInstance(cls.getClassLoader(),
                 new Class[]{cls},
@@ -27,22 +33,24 @@ public class ProxyUtil {
 
                         System.out.println("匿名代理 start:我该做点什么？");
 
+                        if (method.getDeclaringClass() == Object.class) {
+                            return  method.invoke(this, args);
+                        }
 
-                        Object result = method.invoke(target, args);
                         // 获取方法注解
                         Annotation[] annotations = method.getAnnotations();
 
                         for (Annotation annotation : annotations) {
 
                             if (annotation instanceof MyAnnotation) {
-                                System.out.println("value:" + ((MyAnnotation) annotation).value());
+                                System.out.println("注解  value:" + ((MyAnnotation) annotation).value());
                             }
 
                         }
 
 
                         System.out.println("匿名代理 end:我该做点什么？");
-                        return result;
+                        return proxy;
 
 
                     }

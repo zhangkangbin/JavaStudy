@@ -28,14 +28,14 @@ public class Main {
 
         System.out.println("------------动态代理------------");
 
-        //动态代理
+/*        //动态代理
         IUser my = new My();
 
         //源码里会把我们生成的class 放在proxyClassCache 缓存起来 ，反射调取方法
         IUser proxySubject = (IUser) Proxy.newProxyInstance(my.getClass().getClassLoader(),
                 my.getClass().getInterfaces(),
                 new MyProxyHandler<>(my));
-        proxySubject.findGirl();
+        proxySubject.findGirl();*/
 
 
         /**
@@ -44,14 +44,14 @@ public class Main {
          */
 
 
-        ProxyUtil.createClass(my.getClass().getInterfaces());
+   //     ProxyUtil.createClass(my.getClass().getInterfaces());
 
 
         //这个跟动态代理是一样的。
         System.out.println("------------匿名代理------------");
 
         ProxyUtil proxyUtil = new ProxyUtil();
-        proxyUtil.<IUser>getProxy(IUser.class, new My()).findGirl();
+        proxyUtil.<IUser>getProxy(IUser.class).findBoy();
 
 
     }
