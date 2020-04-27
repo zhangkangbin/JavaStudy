@@ -69,7 +69,7 @@ public class LooperTestMain {
         }.start();
 
 
-        //阻塞 如果线程退出，就无法处理后面的事件了。
+        //阻塞 如果线程退出，就无法处理后面的事件了。Activity同理
         Looper.loop();
     }
 
