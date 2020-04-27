@@ -16,6 +16,7 @@ public class Handler {
 
     public void sendMessage(int what, String msg) {
 
+
         queue.add(new Message(what, msg, this));
     }
 

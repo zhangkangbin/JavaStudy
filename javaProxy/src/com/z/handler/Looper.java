@@ -31,6 +31,10 @@ public class Looper {
                 //  System.out.println("----loop----"+queue.size());
 
 
+                /**
+                 * loop怎么知道是哪个Handler，给哪个发消息 ？
+                 * 所以消息里面带有 handle 对象。问题迎刃而解
+                 */
                 if (message.handler != null) {
                     message.handler.handleMessage(message);
                 }
