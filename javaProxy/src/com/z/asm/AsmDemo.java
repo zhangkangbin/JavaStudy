@@ -24,7 +24,7 @@ public class AsmDemo implements Serializable {
 
     private static void writeCode() {
         File file = new File("Test_.class");
-        System.out.println(file.exists());
+        System.out.println(file.getAbsolutePath());
 
         try {
             InputStream inputStream = new FileInputStream(file);
@@ -43,6 +43,7 @@ public class AsmDemo implements Serializable {
             Object object=test.newInstance();
             //反射方法
             Method method = test.getMethod("test1");
+
             method.invoke(object);
 
             //拷贝一份
@@ -50,6 +51,7 @@ public class AsmDemo implements Serializable {
             fileOutputStream.write(code);
             fileOutputStream.close();
             inputStream.close();
+
 
         } catch (Exception e) {
             e.printStackTrace();
