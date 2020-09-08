@@ -7,70 +7,124 @@ package com.z.list.link;
  */
 public class NodeLinkList<T> {
 
-    public Node<T> getFirst() {
-        return first;
-    }
+    private Node<T> mFirst;
+    private Node<T> mLast;
 
 
-    private Node first;
 
-    public int getSize() {
-        return size;
-    }
+    public void  add(T data){
 
-    private int size;
+        Node<T> node=new Node<>(data);
 
-    NodeLinkList() {
-        this.first = null;
-    }
-
-    public void add(T t) {
-        if (first == null) {
-            this.first = new Node<>(t);
-        } else {
-            this.first.setNext(new Node<>(t));
+        if(mFirst==null){
+            mFirst=node;
+        }else {
+            mLast.next=node;
+            mLast.next.pre=mLast;
         }
 
-        size++;
+        mLast=node;
     }
 
-    public boolean findNode(T t) {
-        if (first == null) return false;
 
-        return first.findNode(t);
+    public boolean delete(T data){
+
+        final Node<T> node = find(data);
+
+
+        if(node==null){
+            return  false;
+        }
+
+        final Node<T> nodePre = node.pre;
+        final Node<T> nodeNext = node.next;
+
+
+        if(nodePre==null){
+            //第一个 // null-1-2 变成  1-2-3
+            mFirst=nodeNext;
+        }else {
+            node.pre.next=nodeNext;
+            node.pre=null;
+        }
+
+
+        if(nodeNext==null){
+
+            mLast=nodePre;
+
+        }else {
+
+            //把下一个的next的pre,修改成上一个
+            //如果是第一个这个pre(即nodePre==null情况)为null ,1 2 3 修改为 null-2-3
+            node.next.pre=nodePre;
+            node.next=null;
+        }
+
+
+        return true;
 
     }
 
-    public boolean delete(T t) {
+    public Node<T>  find(T data){
 
-        if (this.first == null) return false;
 
-        if (this.first.getObject().equals(t)) {
-            this.first = this.first.getNext();
-            size--;
-            return true;
-        } else {
+        if(mFirst==null){
+            return null;
+        }
 
-            if (this.first.getNext() != null) {
+        if(mFirst.object.equals(data)){
 
-                if (this.first.getNext().delete(first, t)) {
-                    size--;
-                    return true;
-                }
 
+            return mFirst;
+        }
+
+
+        if(mLast!=null&&mLast.object.equals(data)){
+
+            return mLast;
+        }
+
+
+        Node<T> node = mFirst.next;
+        while (node!=null){
+
+            if(node.object.equals(data)){
+
+                return node;
             }
+            node=mFirst.next;
+        }
+
+        return  null;
+    }
 
 
+    @Override
+    public String toString() {
+
+        StringBuilder stringBuilder=new StringBuilder();
+
+        Node<T> node=mFirst;
+        while (node!=null){
+
+            if(node.pre!=null){
+                stringBuilder.append(node.pre.object+"-");
+            }else {
+                stringBuilder.append("null-");
+            }
+            stringBuilder.append(node.object+"-");
+
+            if(node.next!=null){
+                stringBuilder.append(node.next.object+"   ");
+            }else {
+                stringBuilder.append("null    ");
+            }
+            node=node.next;
         }
 
 
-        return false;
+        System.out.println(stringBuilder.toString());
+        return stringBuilder.toString();
     }
-
-    public void print() {
-        if (first != null) {
-            this.first.print();
-        }
-    }
-
 }
