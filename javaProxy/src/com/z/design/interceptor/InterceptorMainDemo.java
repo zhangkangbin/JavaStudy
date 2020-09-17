@@ -35,6 +35,8 @@ public class InterceptorMainDemo {
             System.out.println(myResult.getName());
 
 
+            System.out.println("这里next  next--："+chain.getNext());
+
             return chain.request();
         });
 

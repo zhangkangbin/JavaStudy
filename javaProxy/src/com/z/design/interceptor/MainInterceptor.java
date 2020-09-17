@@ -37,9 +37,10 @@ class MainInterceptor implements Interceptor.Chain {
 
         MainInterceptor mainInterceptor = new MainInterceptor(interceptorList, next + 1, request);
         Interceptor interceptor = interceptorList.get(next);
+
         //执行下一个interceptor
         MyResult response = interceptor.interceptor(mainInterceptor);
-        System.out.println("next--" + next);
+        //  System.out.println("这里next--" + next);
         return response;
     }
 }

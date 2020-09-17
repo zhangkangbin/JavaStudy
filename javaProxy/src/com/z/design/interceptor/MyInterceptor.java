@@ -11,7 +11,9 @@ public class MyInterceptor implements Interceptor {
         System.out.println("next--："+chain.getNext());
         MyResult myResult = chain.request();
         myResult.setName(myResult.getName()+"--MyInterceptor");
-
-        return chain.proceed(myResult);
+        // 不调用 proceed ，就会停止next
+        MyResult result= chain.proceed(myResult);
+        System.out.println("这里next  next--："+chain.getNext());
+        return result;
     }
 }

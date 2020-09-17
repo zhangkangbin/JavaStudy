@@ -13,7 +13,9 @@ public class SubInterceptor implements Interceptor {
         MyResult myResult = chain.request();
         myResult.setName(myResult.getName()+"--SubInterceptor");
       //  System.out.println("SubInterceptor:"+myResult.getName());
-
-        return chain.proceed(myResult);
+        // 不调用 proceed ，就会停止next
+       MyResult result= chain.proceed(myResult);
+        System.out.println("这里next  next--："+chain.getNext());
+        return myResult;
     }
 }
