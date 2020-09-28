@@ -1,5 +1,8 @@
 package com.z.algorithm;
 
+
+import java.util.Arrays;
+
 /**
  * User: zhangkb
  * Date: 2020/9/21 0010
@@ -10,30 +13,57 @@ package com.z.algorithm;
 public class AlgorithmTest {
 
 
-    /**
-     * 冒泡排序算法
-     * @param sort
-     */
-    public static void mp(int[] sort) {
-        int temp;
-        int length = sort.length;
-        for (int i = 0; i < length; i++) {
-            for (int j = i + 1; j < length; j++) {
-                //
-                if (sort[i] < sort[j]) {
-                    temp = sort[i];
-                    //交换双方位置
-                    sort[i] = sort[j];
-                    //交换双方位置
+    public static void mergeSort(int[] sourceArray,int low,int high){
 
-                    sort[j] = temp;
-                }
+        // 对 arr 进行拷贝，不改变参数内容
+        int[] arr = sourceArray;
+        int length=arr.length;
 
-            }
-
+        if (length < 2) {
+          printArray(arr);
         }
 
+        int middle = (low+high)/2;
 
+        int[] left = new int[middle];
+        int[] right = new int[high-middle];
+
+        //int[] arrayx=new int[10];
+
+
+
+
+       //return merge( mergeSort(left), mergeSort(right));
+
+    }
+
+    private static int[]  merge(int[] left,int[] right){
+
+
+        int[] result = new int[left.length + right.length];
+        int i = 0;
+
+        while (left.length > 0 && right.length > 0) {
+            if (left[0] <= right[0]) {
+                result[i++] = left[0];
+                left = Arrays.copyOfRange(left, 1, left.length);
+            } else {
+                result[i++] = right[0];
+                right = Arrays.copyOfRange(right, 1, right.length);
+            }
+        }
+
+        while (left.length > 0) {
+            result[i++] = left[0];
+            left = Arrays.copyOfRange(left, 1, left.length);
+        }
+
+        while (right.length > 0) {
+            result[i++] = right[0];
+            right = Arrays.copyOfRange(right, 1, right.length);
+        }
+
+        return result;
     }
 
 
@@ -81,6 +111,8 @@ public class AlgorithmTest {
      */
     static void  insertSort(int[] array){
 
+        array = new int[]{5,1,4,2};
+
         int length=array.length;
         int current,preIndex;
         for(int i=1;i<length;i++){
@@ -89,33 +121,40 @@ public class AlgorithmTest {
 
             current=array[i];
 
-            //     int[] sort = {5,7, 6};
+            //  {5,1,2,4,6};
             while (preIndex>=0&&array[preIndex]>current){
 
-                System.out.println("---"+array[preIndex]);
+
+                System.out.println("---:"+array[preIndex]+">"+current);
+           //     System.out.println("---"+current);
+
+                //交换值
                 array[preIndex+1]=array[preIndex];
 
-                i--;
-
+                preIndex--;
+                printArray(array);
             }
-
+          //  printArray(array);
+            System.out.println("\npreIndex---:"+preIndex);
             array[preIndex+1]=current;
 
+
+            printArray(array);
         }
 
-        printArray(array);
+
 
     }
 
 
     /**
      * 选择排序
-     * @param arrays 数组
+     * @param array 数组
      */
-    static void  selectionSort(int[] arrays){
+    static void  selectionSort(int[] array){
 
 
-        int[] array = {1,5,7, 6, 2};
+      //  int[] array = {1,5,7, 6, 2};
 
 
         int size=array.length;
@@ -211,7 +250,7 @@ public class AlgorithmTest {
     }
     public static void main(String[] args) {
 
-        int[] sort = {8,5,7, 6, 2};
+        int[] sort = {1,5,4,3,6};
        // int[] sort = {5,2};
        // int[] sort = {5,2,2};
 
@@ -222,16 +261,17 @@ public class AlgorithmTest {
 */
 
         System.out.println("\n-----选择排序------");
-        selectionSort(sort);
+       // selectionSort(sort);
+      //  aaa(sort);
 
-/*        System.out.println("\n-----插入排序------");
-        insertSort(sort);*/
+        insertSort(sort);
 
     /*    int[] array = {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15};
         binarySearch2(array,13);*/
       //  binarySearch2(array,1);
 
     }
+
 
 
     private static int  binarySearch2(int  [] array,int key){
