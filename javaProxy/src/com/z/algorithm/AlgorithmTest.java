@@ -111,7 +111,7 @@ public class AlgorithmTest {
      */
     static void  insertSort(int[] array){
 
-        array = new int[]{5,1,4,2};
+        array = new int[]{9,3,1,2};
 
         int length=array.length;
         int current,preIndex;
@@ -121,7 +121,7 @@ public class AlgorithmTest {
 
             current=array[i];
 
-            //  {5,1,2,4,6};
+            // {9,3,1,6};
             while (preIndex>=0&&array[preIndex]>current){
 
 
@@ -135,7 +135,7 @@ public class AlgorithmTest {
                 printArray(array);
             }
           //  printArray(array);
-            System.out.println("\npreIndex---:"+preIndex);
+            System.out.println("\npreIndex---:"+(preIndex));
             array[preIndex+1]=current;
 
 
@@ -155,7 +155,6 @@ public class AlgorithmTest {
 
 
       //  int[] array = {1,5,7, 6, 2};
-
 
         int size=array.length;
         int minIndex=0;
@@ -242,6 +241,8 @@ public class AlgorithmTest {
     }
 
 
+
+
     private static void printArray(int[] sort){
         for (int aSort : sort) {
             System.out.print(aSort + " ,");
@@ -250,7 +251,7 @@ public class AlgorithmTest {
     }
     public static void main(String[] args) {
 
-        int[] sort = {1,5,4,3,6};
+        int[] sort = {9,1,3,6};
        // int[] sort = {5,2};
        // int[] sort = {5,2,2};
 
@@ -263,7 +264,7 @@ public class AlgorithmTest {
         System.out.println("\n-----选择排序------");
        // selectionSort(sort);
       //  aaa(sort);
-
+        System.out.println("\n-----插入排序------");
         insertSort(sort);
 
     /*    int[] array = {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15};
