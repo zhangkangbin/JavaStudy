@@ -1,18 +1,17 @@
 package com.z.handler;
 
-import java.util.concurrent.LinkedBlockingQueue;
-
 public class Looper {
 
     private static final ThreadLocal<Looper> sThreadLocal = new ThreadLocal<Looper>();
 
-    public  static  LinkedBlockingQueue<Message> queue ;
+    public    MessageQueue queue ;
     private Looper() {
+        queue = new MessageQueue();
     }
 
 
     public static void initLooper() {
-        queue = new LinkedBlockingQueue<Message>();
+
         sThreadLocal.set(new Looper());
     }
 
@@ -24,26 +23,22 @@ public class Looper {
 
     public static void loop() {
 
+        Looper me = getLooper();
         for (; ; ) {
-            try {
-                //阻塞
-                Message message = queue.take();
-                //  System.out.println("----loop----"+queue.size());
+            //没有消息这里就会一直阻塞，有消息就取出来。
+            Message message = me.queue.next();
+            //  System.out.println("----loop----"+queue.size());
 
-
-                /**
-                 * loop怎么知道是哪个Handler，给哪个发消息 ？
-                 * 所以消息里面带有 handle 对象。问题迎刃而解
-                 */
-                if (message.handler != null) {
-                    message.handler.handleMessage(message);
-                }
-
-                System.out.println(message.massage);
-
-            } catch (InterruptedException e) {
-                e.printStackTrace();
+            /**
+             * loop怎么知道是哪个Handler，给哪个发消息 ？
+             * 所以消息里面带有 handle 对象。问题迎刃而解
+             */
+            if (message.target != null) {
+                message.target.handleMessage(message);
             }
+
+            System.out.println(message.massage);
+
         }
     }
 }
