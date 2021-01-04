@@ -2,7 +2,7 @@ package com.z.handler;
 
 public class Handler {
 
-    private Looper looper;
+    private final Looper looper;
     public MessageQueue  queue;
     public Callback  callback;
 
@@ -12,8 +12,8 @@ public class Handler {
     public Handler(Callback callback,Looper looper) {
 
         this.callback=callback;
-        this.looper=looper;
         this.queue=looper.queue;
+        this.looper=looper;
     }
 
     public void sendMessage(int what, String msg) {
@@ -23,7 +23,15 @@ public class Handler {
 
     public void handleMessage(Message message) {
 
+        if(callback!=null){
+            callback.handleMessage(message);
+        }
+
     }
+    public final Looper getLooper() {
+        return looper;
+    }
+
     public interface Callback {
 
         boolean handleMessage(Message msg);

@@ -4,14 +4,16 @@ public class Looper {
 
     private static final ThreadLocal<Looper> sThreadLocal = new ThreadLocal<Looper>();
 
-    public    MessageQueue queue ;
+    public MessageQueue queue ;
     private Looper() {
         queue = new MessageQueue();
     }
 
 
     public static void initLooper() {
-
+        if (sThreadLocal.get() != null) {
+            throw new RuntimeException("Only one Looper may be created per thread");
+        }
         sThreadLocal.set(new Looper());
     }
 
