@@ -1,7 +1,9 @@
 package com.z.handler;
 
+/**
+ * 控制消息的发送和消息的回调。
+ */
 public class Handler {
-
     private final Looper looper;
     public MessageQueue  queue;
     public Callback  callback;
