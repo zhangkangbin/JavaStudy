@@ -9,7 +9,10 @@ public class LooperTestMain {
 
     public static void main(String[] args) {
         Looper.initLooper();
-        Handler handler1 = new Handler() {
+        Handler handler1 = new Handler(msg -> {
+            //如果这里为true会拦截消息
+            return false;
+        }) {
             @Override
             public void handleMessage(Message message) {
                 super.handleMessage(message);
