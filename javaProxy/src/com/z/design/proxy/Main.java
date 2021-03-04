@@ -1,6 +1,7 @@
 package com.z.design.proxy;
 
 
+import java.lang.reflect.Proxy;
 
 /**
  * 在代理模式（Proxy Pattern）中，一个类代表另一个类的功能。这种类型的设计模式属于结构型模式。
@@ -24,14 +25,14 @@ public class Main {
 
         System.out.println("------------动态代理------------");
 
-/*        //动态代理
+      //动态代理
         IUser my = new My();
 
         //源码里会把我们生成的class 放在proxyClassCache 缓存起来 ，反射调取方法
         IUser proxySubject = (IUser) Proxy.newProxyInstance(my.getClass().getClassLoader(),
                 my.getClass().getInterfaces(),
                 new MyProxyHandler<>(my));
-        proxySubject.findGirl();*/
+        proxySubject.findGirl();
 
 
         /**
