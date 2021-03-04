@@ -1,10 +1,6 @@
 package com.z.design.proxy;
 
-import sun.misc.ProxyGenerator;
 
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.lang.reflect.Proxy;
 
 /**
  * 在代理模式（Proxy Pattern）中，一个类代表另一个类的功能。这种类型的设计模式属于结构型模式。
@@ -51,7 +47,9 @@ public class Main {
         System.out.println("------------匿名代理------------");
 
         ProxyUtil proxyUtil = new ProxyUtil();
-        proxyUtil.<IUser>getProxy(IUser.class).findBoy();
+        IUser user = proxyUtil.getProxy(IUser.class);
+        user.findBoy();
+        user.findGirl();
 
 
     }

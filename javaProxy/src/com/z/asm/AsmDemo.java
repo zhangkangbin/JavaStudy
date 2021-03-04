@@ -23,7 +23,7 @@ public class AsmDemo implements Serializable {
     }
 
     private static void writeCode() {
-        File file = new File("Test_.class");
+        File file = new File("javaProxy/Test_.class");
         System.out.println(file.getAbsolutePath());
 
         try {
