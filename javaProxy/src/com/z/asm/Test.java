@@ -8,15 +8,15 @@ package com.z.asm;
  */
 
 public class Test {
-    String _start = "_start";
     @MyInjection
     public void test1() {
 
         int _test = 11;
-        String _test2 = "_test2";
         System.out.println(_test);
 
+
     }
+
 
 
 }

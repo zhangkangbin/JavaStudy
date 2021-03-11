@@ -17,6 +17,7 @@ public class Main {
     public static void main(String[] args) {
 
         System.out.println("------------静态代理------------");
+
         //静态代理
         IUser myProxy = new MyProxy(new My());
         //MyProxy 代理 new My()
@@ -41,8 +42,7 @@ public class Main {
          */
 
 
-   //     ProxyUtil.createClass(my.getClass().getInterfaces());
-
+   //   ProxyUtil.createClass(my.getClass().getInterfaces());
 
         //这个跟动态代理是一样的。
         System.out.println("------------匿名代理------------");
