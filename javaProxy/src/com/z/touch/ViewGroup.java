@@ -25,20 +25,27 @@ public class ViewGroup extends View{
      */
     boolean onInterceptTouchEvent(MotionEvent ev) {
 
-
+        System.out.println(tag+"：onInterceptTouchEvent 处理开始");
         return false;
     }
 
     @Override
     public boolean dispatchTouchEvent(MotionEvent ev) {
 
-        System.out.println(tag+"：处理开始");
+        System.out.println(tag+"：dispatchTouchEvent 处理开始");
 
-        for (View view:list){
-            view.dispatchTouchEvent(ev);
+
+        final boolean intercepted=onInterceptTouchEvent(ev);
+
+        if(!intercepted){
+
+            for (View view:list){
+                view.dispatchTouchEvent(ev);
+            }
+
         }
 
-        System.out.println(tag+"：----------------处理结束");
+        System.out.println(tag+"：----------------dispatchTouchEvent 处理结束");
 
         return super.dispatchTouchEvent(ev);
     }
