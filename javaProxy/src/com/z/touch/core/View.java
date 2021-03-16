@@ -1,4 +1,4 @@
-package com.z.touch;
+package com.z.touch.core;
 
 public class View implements TouchEvent{
     protected String tag="";
@@ -7,13 +7,14 @@ public class View implements TouchEvent{
     }
     @Override
     public boolean dispatchTouchEvent(MotionEvent ev) {
+
         onTouchEvent(ev);
         return false;
     }
 
     @Override
     public boolean onTouchEvent(MotionEvent ev) {
-        System.out.println(tag+"：----------------onTouchEvent: "+tag);
+       // System.out.println(tag+"：----------------onTouchEvent: "+tag);
         return false;
     }
 }

@@ -1,4 +1,4 @@
-package com.z.touch;
+package com.z.touch.core;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,16 +25,16 @@ public class ViewGroup extends View {
      * @param ev
      * @return
      */
-    boolean onInterceptTouchEvent(MotionEvent ev) {
+    public boolean onInterceptTouchEvent(MotionEvent ev) {
 
-        System.out.println(tag + "：onInterceptTouchEvent 处理开始");
+  //      System.out.println(tag + "：onInterceptTouchEvent 处理开始");
         return false;
     }
 
     @Override
     public boolean dispatchTouchEvent(MotionEvent ev) {
 
-        System.out.println(tag + "：dispatchTouchEvent 处理开始");
+  //      System.out.println(tag + "：dispatchTouchEvent 处理开始");
 
 
         final boolean intercepted = onInterceptTouchEvent(ev);
