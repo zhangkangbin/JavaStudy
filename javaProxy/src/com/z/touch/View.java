@@ -7,11 +7,13 @@ public class View implements TouchEvent{
     }
     @Override
     public boolean dispatchTouchEvent(MotionEvent ev) {
+        onTouchEvent(ev);
         return false;
     }
 
     @Override
     public boolean onTouchEvent(MotionEvent ev) {
+        System.out.println(tag+"：----------------onTouchEvent: "+tag);
         return false;
     }
 }
