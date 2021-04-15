@@ -11,19 +11,19 @@ public class MyViewGroup  extends ViewGroup {
 
     @Override
     public boolean onInterceptTouchEvent(MotionEvent ev) {
-        System.out.println(tag + "：onInterceptTouchEvent 处理开始");
+        System.out.println(tag + "MyViewGroup：onInterceptTouchEvent 处理开始");
         return super.onInterceptTouchEvent(ev);
     }
 
     @Override
     public boolean dispatchTouchEvent(MotionEvent ev) {
-        System.out.println(tag + "：dispatchTouchEvent 处理开始");
+        System.out.println(tag + "MyViewGroup ：dispatchTouchEvent 处理开始");
         return super.dispatchTouchEvent(ev);
     }
 
     @Override
     public boolean onTouchEvent(MotionEvent ev) {
-        System.out.println(tag + "：onTouchEvent 处理开始");
+        System.out.println(tag + "MyViewGroup ：onTouchEvent 处理开始");
         return super.onTouchEvent(ev);
     }
 }

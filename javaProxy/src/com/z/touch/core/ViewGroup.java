@@ -27,14 +27,14 @@ public class ViewGroup extends View {
      */
     public boolean onInterceptTouchEvent(MotionEvent ev) {
 
-  //      System.out.println(tag + "：onInterceptTouchEvent 处理开始");
+        //      System.out.println(tag + "：onInterceptTouchEvent 处理开始");
         return false;
     }
 
     @Override
     public boolean dispatchTouchEvent(MotionEvent ev) {
 
-  //      System.out.println(tag + "：dispatchTouchEvent 处理开始");
+        //      System.out.println(tag + "：dispatchTouchEvent 处理开始");
 
 
         final boolean intercepted = onInterceptTouchEvent(ev);
@@ -43,11 +43,18 @@ public class ViewGroup extends View {
 
             for (View child : list) {
                 //  child.dispatchTouchEvent(ev);
+                boolean isDispatch = dispatchTransformedTouchEvent(ev, child);
+                //System.out.println(tag + "：-------------------dispatchTouchEvent isDispatch:" + isDispatch);
+                if (isDispatch) {
 
-                dispatchTransformedTouchEvent(ev, child);
+                    ev.isConsume=true;
+
+                    return true;
+                }
             }
 
         }
+
 
         boolean handled = dispatchTransformedTouchEvent(ev, null);
         //   System.out.println(tag+"：----------------dispatchTouchEvent 处理结束");
@@ -68,3 +75,20 @@ public class ViewGroup extends View {
 
 
 }
+/*
+return true
+1-0MyViewGroup ：dispatchTouchEvent 处理开始
+1-0MyViewGroup：onInterceptTouchEvent 处理开始
+1-2MyView ：dispatchTouchEvent 处理开始
+1-2MyView ：onTouchEvent 处理开始
+1-0：-------------------dispatchTouchEvent isDispatch:true
+
+1-0MyViewGroup ：dispatchTouchEvent 处理开始
+1-0MyViewGroup：onInterceptTouchEvent 处理开始
+1-2MyView ：dispatchTouchEvent 处理开始
+1-2MyView ：onTouchEvent 处理开始
+1-0：-------------------dispatchTouchEvent isDispatch:true
+1-0MyViewGroup ：onTouchEvent 处理开始
+
+
+ */

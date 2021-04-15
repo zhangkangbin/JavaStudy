@@ -23,14 +23,18 @@ public class AsmDemo implements Serializable {
     }
 
     private static void writeCode() {
-        File file = new File("javaProxy/Test_.class");
+        File file = new File("javaProxy/Test2.class");
         System.out.println(file.getAbsolutePath());
 
         try {
             InputStream inputStream = new FileInputStream(file);
+            //读取文件
             ClassReader reader = new ClassReader(inputStream);
 
+            //class写
             ClassWriter writer = new ClassWriter(reader, ClassWriter.COMPUTE_MAXS);
+
+            //扫描并写入
             ScanClassVisitor cv = new ScanClassVisitor(Opcodes.ASM5, writer);
             reader.accept(cv, ClassReader.EXPAND_FRAMES);
 
@@ -39,7 +43,8 @@ public class AsmDemo implements Serializable {
 
 
             MyClassLoader myClassLoader = new MyClassLoader();
-            Class test = myClassLoader.defineClass("com.z.asm.Test", code);
+            //装置修改后的类
+            Class<?> test = myClassLoader.defineClass("com.z.asm.Test", code);
             Object object=test.newInstance();
             //反射方法
             Method method = test.getMethod("test1");

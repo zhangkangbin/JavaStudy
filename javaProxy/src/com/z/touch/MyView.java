@@ -10,13 +10,14 @@ public class MyView  extends View {
 
     @Override
     public boolean dispatchTouchEvent(MotionEvent ev) {
-        System.out.println(tag + "：dispatchTouchEvent 处理开始");
+        System.out.println(tag + "MyView ：dispatchTouchEvent 处理开始");
         return super.dispatchTouchEvent(ev);
     }
 
     @Override
     public boolean onTouchEvent(MotionEvent ev) {
-        System.out.println(tag + "：onTouchEvent 处理开始");
-        return super.onTouchEvent(ev);
+        System.out.println(tag + "MyView ：onTouchEvent 处理开始");
+       // return super.onTouchEvent(ev);
+        return true;
     }
 }

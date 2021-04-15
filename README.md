@@ -3,7 +3,7 @@
 
 ### javaProxy项目：
 
-### design
+## design
 设计模式学习
 #### 1,代理模式：静态代理，动态代理，动态代理生成原理。
 #### 2,责任链
@@ -15,6 +15,8 @@
 #### 8,组合模式 
 #### 9,模板模式
 #### 10,原型模式
-### touch
-### 模仿Android 事件分发模型
+
+## touch
+
+#### 模仿Android 事件分发模型
 发现宝藏设计模式网址 https://refactoringguru.cn/design-patterns/

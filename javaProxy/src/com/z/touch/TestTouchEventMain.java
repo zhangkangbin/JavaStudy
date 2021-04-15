@@ -2,6 +2,7 @@ package com.z.touch;
 
 import com.z.touch.core.MotionEvent;
 import com.z.touch.core.View;
+import com.z.touch.core.ViewGroup;
 
 /**
  * 模仿Android 事件分发
@@ -22,7 +23,8 @@ public class TestTouchEventMain {
 
 
         viewGroup.addView(viewGroup11);*/
-        viewGroup.addView(new MyView("1-2"));
+        viewGroup.addView(new MyViewGroup("1-2"));
+        viewGroup.addView(new MyView("1-3"));
 
 
 
