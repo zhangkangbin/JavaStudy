@@ -14,6 +14,7 @@ public class OperationTest {
         test3();
         test4();
 
+
     }
 
     private static  void test0(){
@@ -51,8 +52,9 @@ public class OperationTest {
         int d=2;//10
         int e=-3;//11
 
-        //这个有点奇怪，网上的教程就是千篇一律的。害人呀
+        //这个有点奇怪，网上的教程就是千篇一律的。害人呀，找不到计算的方法。
         //就是先取反,即0变成1，1变成0，然后加1，然后再取反。
+
 
         System.out.println("~非运算:"+~a);
         System.out.println("~非运算:"+(~b));
@@ -64,11 +66,19 @@ public class OperationTest {
         System.out.println("~非运算-4:"+~-4);
 
         System.out.println("& ~非运算:"+(a & ~d));
+
+
+
+        //2 ,0b代表二进制，int 是三十二位，补0
+        System.out.println(0b00000000000000000000000000000010);
+        //-3 0b代表二进制，int 是三十二位，补0
+        System.out.println(0b11111111111111111111111111111101);
     }
 
     private static  void test3(){
 
         //异或运算符是用符号“^”表示的，其运算规律是：
+
         //两个操作数的位中，相同则结果为0，不同则结果为1
         int a=129;//10000001
         int b=128;//10000000
@@ -101,7 +111,9 @@ public class OperationTest {
          */
         System.out.println(">>:"+(16>>2));
         System.out.println(">>:"+(-16>>2));
-        System.out.println(">>>:"+(16>>>2));
+        System.out.println(">>>:"+(-8>>>1));
+        System.out.println(">>>:"+(-0b00001000));
+        System.out.println(">>>:"+(-0b00000100));
     }
 
 
