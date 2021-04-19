@@ -17,7 +17,7 @@ public class Test {
 
     // Packing and unpacking ctl
     /**
-     *
+     *减少锁的竞争。
      * &与运算
      * 两个操作数中位都为1，结果才为1，否则结果为0
      *  ~即0变成1，1变成0.(简单来说是加一，然后取反)比如 3 ，加一，是4，取反为-4.
@@ -75,8 +75,16 @@ public class Test {
 
 
         System.out.println("---------------------------------------");
+
+        System.out.println("ctl.get():" + ctl.get());
+        System.out.println("workerCountOf:" + workerCountOf(ctl.get()));
+        //工作线程增加。
+        System.out.println("compareAndSet:" + ctl.compareAndSet(ctl.get(), ctl.get() + 1));
+        System.out.println("compareAndSet:" + ctl.compareAndSet(ctl.get(), ctl.get() + 1));
+        System.out.println("compareAndSet:" + ctl.compareAndSet(ctl.get(), ctl.get() + 1));
         System.out.println("workerCountOf:" + workerCountOf(ctl.get()));
 
+        System.out.println("---------------------------------------");
 
         System.out.println("536870912 TIDYING:" +  (TIDYING));
         System.out.println("536870912 TIDYING:" +  (~TIDYING));
