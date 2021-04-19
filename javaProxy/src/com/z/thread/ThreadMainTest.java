@@ -1,37 +1,86 @@
 package com.z.thread;
 
-import java.util.concurrent.ArrayBlockingQueue;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.ThreadPoolExecutor;
-import java.util.concurrent.TimeUnit;
+import java.util.concurrent.*;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.locks.ReentrantReadWriteLock;
 
-/**
- *
- */
+
 public class ThreadMainTest {
+
+    static volatile int i=10;
+    static volatile boolean isStop=false;
+
+    private static final int COUNT_BITS = Integer.SIZE - 3;
+    private static final int CAPACITY   = (1 << COUNT_BITS) - 1;
+
+    private static int workerCountOf(int c)  { return c & CAPACITY; }
+
+
 
     public static void main(String[] args) {
 
-        ExecutorService executorService = new ThreadPoolExecutor(1, 1,
-                60L, TimeUnit.SECONDS,
-                new ArrayBlockingQueue<>(10));
+
+        ReentrantReadWriteLock reentrantReadWriteLock;
+
+        //数字的原子操作，内存
+        AtomicInteger atomicInteger=new AtomicInteger();
+        atomicInteger.get();
+        atomicInteger.set(10);
+        //i++
+        atomicInteger.incrementAndGet();
+        //i--
+        atomicInteger.decrementAndGet();
+        ArrayBlockingQueue queue = new ArrayBlockingQueue<>(5);
+        ScheduledThreadPoolExecutor q;
+        ThreadPoolExecutor executorService = new ThreadPoolExecutor(2, 10002,
+                60L, TimeUnit.SECONDS,queue
+                );
 
         executorService.execute(new Runnable() {
             @Override
             public void run() {
-                System.out.println("abcdefg");
+                try {
+                    Thread.sleep(30000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
+                System.out.println("test"+queue.size());
             }
         });
 
-        executorService.shutdown();
+
+        System.out.println("COUNT_BITS:"+(COUNT_BITS));
+        System.out.println("CAPACITY:"+(CAPACITY));
+        System.out.println("CAPACITY:"+(1<<29));
+        System.out.println("workerCountOf:"+(workerCountOf(536870912)));
 
 
-        AtomicInteger atomicInteger=new AtomicInteger();
+        while (true){
 
-        atomicInteger.get();
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            executorService.execute(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        Thread.sleep(10000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
 
-        atomicInteger.set(10);
+
+
+                    System.out.println("test"+queue.size());
+                }
+            });
+
+
+        }
+
 
     }
 }

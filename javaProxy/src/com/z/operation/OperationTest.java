@@ -3,17 +3,25 @@ package com.z.operation;
 /**
  * 运算符计算
  * ~ & ^ |
+ * int 为32位
  */
 public class OperationTest {
 
     public static void main(String[] args) {
+
+
+
+        System.out.println("|或运算:"+(3<<3));
+        System.out.println("|或运算:"+(-1<<29));
+        System.out.println("|或运算:"+(0<<29));
+        System.out.println("|或运算:"+(1<<29));
+        System.out.println("|或运算:"+(2<<29));
 
         test0();
         test1();
         test2();
         test3();
         test4();
-
 
     }
 
@@ -40,6 +48,7 @@ public class OperationTest {
         System.out.println("|或运算:"+(a|b));
         System.out.println("|或运算:"+(a|c));
         System.out.println("|或运算:"+(b|c));
+        System.out.println("--|或运算:"+(128|0));
     }
     private static  void test2(){
 
