@@ -50,6 +50,7 @@ public class CountTest {
     public static void main(String[] args) {
 
 
+        //读写锁也是用的这种状态
         ReentrantReadWriteLock reentrantReadWriteLock;
         //这个是线程的状态
         System.out.println("CAPACITY:"+CAPACITY);
