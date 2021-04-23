@@ -3,12 +3,14 @@ package com.z.thread;
 import java.util.concurrent.ArrayBlockingQueue;
 
 /**
- * 模拟多线程
+ * 受volley源码的影响
+ * 简单模拟线程池
+ *
  */
 public class SimulationThreadTest {
 
     private static int count = 1;
-    private static ArrayBlockingQueue<String> strings = new ArrayBlockingQueue<String>(30);
+    private static final ArrayBlockingQueue<Task> tasks = new ArrayBlockingQueue<Task>(30);
 
     public static void main(String[] args) {
         productionString();
@@ -19,7 +21,18 @@ public class SimulationThreadTest {
 
     }
 
+    public void remove(Task obj){
 
+        tasks.remove(obj);
+    }
+
+    public void clear(){
+        tasks.clear();
+    }
+
+    /**
+     * 模拟生产，主要负责生产任务。
+     */
     private static void productionString() {
 
         Thread thread = new Thread() {
@@ -30,7 +43,7 @@ public class SimulationThreadTest {
                 try {
 
                     while (true) {
-                        strings.put("count:" + count++);
+                        tasks.put(new Task("count:" + count++));
                         sleep(1000);
                         System.out.println("--生产--");
                     }
@@ -44,6 +57,10 @@ public class SimulationThreadTest {
 
     }
 
+    /**
+     * 模拟处理任务。
+     * @param nameTag
+     */
     private static void startThread(int nameTag) {
 
         Thread thread = new Thread() {
@@ -55,13 +72,15 @@ public class SimulationThreadTest {
                     while (true) {
 
                         try {
-                            long sleep = (long) (Math.random() * 10000);
-                            System.out.println(sleep);
-                            sleep(sleep);
+
                             //没有任务就阻塞
-                            String takeString = strings.take();
+                            Task takeString = tasks.take();
                             String name = getName();
-                            System.out.println(strings.size() + "::" + name + "--:" + takeString);
+                            System.out.println(tasks.size() + "::" + name + "--:" + takeString);
+
+                            //模拟处理任务
+                            processTask();
+
                         }catch (Exception e){
                             e.printStackTrace();
                         }
@@ -75,5 +94,28 @@ public class SimulationThreadTest {
         thread.setName("tag:" + nameTag);
         thread.start();
 
+    }
+
+    /**
+     * 模拟处理任务
+     * @throws InterruptedException
+     */
+    private static void processTask() throws InterruptedException {
+
+        long sleep = (long) (Math.random() * 10000);
+        System.out.println(sleep);
+        Thread.sleep(sleep);
+    }
+
+}
+
+
+/**
+ * 任务类
+ */
+class  Task{
+    public String tag;
+    public Task(String tag){
+        this.tag=tag;
     }
 }
