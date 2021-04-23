@@ -25,20 +25,28 @@ public class SimulationThreadTest {
         }
 
     }
+    /**
+     * 添加任务
+     *
+     * @param obj 任务
+     */
+    public void addTask(Task obj) {
+        tasks.add(obj);
+    }
 
     /**
      * 移除任务
      *
      * @param obj 任务
      */
-    public void remove(Task obj) {
+    public void removeTask(Task obj) {
         tasks.remove(obj);
     }
 
     /**
      * 清除所有任务
      */
-    public void clear() {
+    public void clearAllTask() {
         tasks.clear();
     }
 
