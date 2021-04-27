@@ -1,27 +1,28 @@
 package com.z.thread.simple;
 
 import java.util.Random;
-import java.util.concurrent.ArrayBlockingQueue;
+import java.util.concurrent.LinkedBlockingQueue;
 
 /**
- * 受volley源码的影响
- * 简单模拟线程池
- * ThreadPoolExecutor 的 allowCoreThreadTimeOut 默认也是不回收的，可见占用的系统资源很少，应该还没有你频繁创建线程的和回收消耗。
- * 因为通常将处于阻塞状态的进程排成一个队列， 称为阻塞队列。在有的系统中，
- * 按阻塞的原因不同而将处于阻塞状态的进程排成多个队列。
- * todo:备注:任务限制，拒绝策略。
+ *
+ * 简单模拟线程池测试入口
+ * kang
  */
 public class SimulationThreadTest {
-
-    //ThreadPoolExecutor中是用AtomicInteger，代表线程状态和在工作线程数
     private static volatile int count = 1;
-
     public static void main(String[] args) {
 
-
-        SimpleThreadPoolExecutor executor=new SimpleThreadPoolExecutor();
+        SimpleThreadPoolExecutor executor=new SimpleThreadPoolExecutor(3,10,new LinkedBlockingQueue<>());
         //添加一个任务
-        executor.start(new Task("first 1"));
+        executor.execute(new Task("first 1"){
+            @Override
+            public void run() {
+                super.run();
+                //模拟耗时处理任务
+                processTask();
+
+            }
+        });
 
         //这一步，只这为了模拟生产任务。
        productionTask(executor);
@@ -40,7 +41,15 @@ public class SimulationThreadTest {
                 try {
 
                     while (true) {
-                        executor.start(new Task("count:" + count++));
+                        executor.execute(new Task("count:" + count++){
+
+                            @Override
+                            public void run() {
+                                super.run();
+                               // 模拟处理任务
+                                processTask();
+                            }
+                        });
                         sleep(1000);
                         System.out.println("--生产--");
                     }
@@ -51,6 +60,23 @@ public class SimulationThreadTest {
         };
         thread.setName("生产");
         thread.start();
+
+    }
+
+
+    /**
+     * 模拟处理任务
+     */
+    private static void processTask() {
+
+        //随机休眠
+        int sleep = new Random().nextInt(10) * 1000;
+        System.out.println("模拟处理任务耗时："+sleep);
+        try {
+            Thread.sleep(sleep);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 
     }
 
