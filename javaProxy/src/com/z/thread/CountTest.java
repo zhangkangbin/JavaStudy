@@ -1,18 +1,21 @@
 package com.z.thread;
 
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.atomic.AtomicIntegerFieldUpdater;
 import java.util.concurrent.locks.ReentrantLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 public class CountTest {
     //  private static final int COUNT_BITS = Integer.SIZE - 3;
     //一半16用来存储高位，一半存低位，（神奇的存储方式。减少变量，减少锁的竞争）
+    //一半高3位用来存储状态，低29位存 线程池线程运行数量，（神奇的存储方式。减少变量，减少锁的竞争）
     private static final int COUNT_BITS = Integer.SIZE - 3;
     //看来这个值CAPACITY不是随便写的，他的二进制，都是1111111111111111
     // 。(1 << SHARED_SHIFT) - 1;
     private static final int CAPACITY = (1 << COUNT_BITS) -1;
     // runState is stored in the high-order bits
     private static final int RUNNING = -1 << COUNT_BITS;
+    private static final int SHUTDOWN   =  3 << COUNT_BITS;
 
     //private static final int CAPACITY = Integer.SIZE ;
    // private static final int RUNNING = -1 << CAPACITY;
@@ -49,7 +52,6 @@ public class CountTest {
 
     public static void main(String[] args) {
 
-
         //读写锁也是用的这种状态
         ReentrantReadWriteLock reentrantReadWriteLock;
         //这个是线程的状态
@@ -57,16 +59,24 @@ public class CountTest {
         System.out.println("RUNNING:"+RUNNING);
       //  System.out.println(runStateOf(atomicInteger.get()));
 
+
+
         //System.out.println(workerCountOf(atomicInteger.get()));
+        System.out.println("二进制： 128     ："+Integer.toBinaryString(128));
+        System.out.println("二进制：CAPACITYL："+Long.toBinaryString(99999999999999999L));
         System.out.println("二进制： CAPACITY："+Integer.toBinaryString(CAPACITY));
         System.out.println("二进制：~CAPACITY："+Integer.toBinaryString(~CAPACITY));
         System.out.println("二进制：RUNNING+0："+Integer.toBinaryString(RUNNING));
         System.out.println("二进制：RUNNING+1："+Integer.toBinaryString(RUNNING+1));
-        System.out.println("runStateOf："+runStateOf(RUNNING));
+        System.out.println("runStateOf RUNNING ："+runStateOf(RUNNING));
+        System.out.println("runStateOf SHUTDOWN："+runStateOf(SHUTDOWN));
         //用来控制线程的数量。
         System.out.println(workerCountOf(RUNNING));
         System.out.println(workerCountOf(RUNNING+1));
         System.out.println(workerCountOf(RUNNING+2));
+
+        //FiledUpdater
+        //AtomicIntegerFieldUpdater
     }
 
 }
