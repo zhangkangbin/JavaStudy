@@ -9,13 +9,20 @@ public class CountTest {
     //  private static final int COUNT_BITS = Integer.SIZE - 3;
     //一半16用来存储高位，一半存低位，（神奇的存储方式。减少变量，减少锁的竞争）
     //一半高3位用来存储状态，低29位存 线程池线程运行数量，（神奇的存储方式。减少变量，减少锁的竞争）
-    private static final int COUNT_BITS = Integer.SIZE - 3;
-    //看来这个值CAPACITY不是随便写的，他的二进制，都是1111111111111111
+    private static final int COUNT_BITS = Integer.SIZE - 3;//32-3=29
+    //看来这个值CAPACITY不是随便写的，他的二进制，都是29位的1，1111111111111111，如果COUNT_BITS是16，就是低位补160，减一个1，结果就是16个1，如果是2，就是2个1。
     // 。(1 << SHARED_SHIFT) - 1;
     private static final int CAPACITY = (1 << COUNT_BITS) -1;
-    // runState is stored in the high-order bits
-    private static final int RUNNING = -1 << COUNT_BITS;
-    private static final int SHUTDOWN   =  3 << COUNT_BITS;
+
+    private static final int RUNNING    = -1 << COUNT_BITS;
+
+    private static final int SHUTDOWN   =  0 << COUNT_BITS;
+
+    private static final int STOP       =  1 << COUNT_BITS;
+
+    private static final int TIDYING    =  2 << COUNT_BITS;
+
+    private static final int TERMINATED =  3 << COUNT_BITS;
 
     //private static final int CAPACITY = Integer.SIZE ;
    // private static final int RUNNING = -1 << CAPACITY;
@@ -52,6 +59,8 @@ public class CountTest {
 
     public static void main(String[] args) {
 
+
+
         //读写锁也是用的这种状态
         ReentrantReadWriteLock reentrantReadWriteLock;
         //这个是线程的状态
@@ -62,8 +71,11 @@ public class CountTest {
 
 
         //System.out.println(workerCountOf(atomicInteger.get()));
-        System.out.println("二进制： 128     ："+Integer.toBinaryString(128));
-        System.out.println("二进制：CAPACITYL："+Long.toBinaryString(99999999999999999L));
+        System.out.println("二进制： CAPACITY："+Integer.toBinaryString((1 << 1) -1));
+        System.out.println("二进制： CAPACITY："+Integer.toBinaryString((1 << 2) -1));
+        System.out.println("二进制： CAPACITY："+Integer.toBinaryString((1 << 3) -1));
+        System.out.println("二进制： CAPACITY："+Integer.toBinaryString((1 << 4) -1));
+        System.out.println("二进制： CAPACITY："+Integer.toBinaryString((1 << 5) -1));
         System.out.println("二进制： CAPACITY："+Integer.toBinaryString(CAPACITY));
         System.out.println("二进制：~CAPACITY："+Integer.toBinaryString(~CAPACITY));
         System.out.println("二进制：RUNNING+0："+Integer.toBinaryString(RUNNING));
@@ -77,6 +89,19 @@ public class CountTest {
 
         //FiledUpdater
         //AtomicIntegerFieldUpdater
+
+        System.out.println(" RUNNING:" + Integer.toBinaryString(RUNNING));
+        System.out.println(" RUNNING:" + RUNNING);
+        System.out.println(" SHUTDOWN:" + Integer.toBinaryString(SHUTDOWN));
+        System.out.println(" SHUTDOWN:" + SHUTDOWN);
+        System.out.println(" STOP:" + Integer.toBinaryString(STOP));
+        System.out.println(" STOP:" + STOP);
+        System.out.println(" TIDYING:" + Integer.toBinaryString(TIDYING));
+        System.out.println(" TIDYING:" + TIDYING);
+        System.out.println(" TERMINATED:" + Integer.toBinaryString(TERMINATED));
+        System.out.println(" TERMINATED:" + TERMINATED);
+        System.out.println(" TERMINATED -536870911:" + Integer.toBinaryString(-536870911));
+
     }
 
 }

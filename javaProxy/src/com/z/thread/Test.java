@@ -4,7 +4,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 public class Test {
 
-    private static final int COUNT_BITS = Integer.SIZE - 3;
+    private static final int COUNT_BITS = Integer.SIZE - 3; //29
     private static final int CAPACITY = (1 << COUNT_BITS) - 1;
 
     // runState is stored in the high-order bits
@@ -116,7 +116,8 @@ public class Test {
         //-536870912 11100000000000000000000000000000
         //-536870912 11100000000000000000000000000000
         System.out.println(" RUNNING:" +  (runStateOf(RUNNING)));
-        System.out.println(" RUNNING:" + Integer.toBinaryString(-1));
+
+
 
     }
 }
