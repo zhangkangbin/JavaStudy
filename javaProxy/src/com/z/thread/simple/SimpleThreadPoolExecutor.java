@@ -22,7 +22,7 @@ public class SimpleThreadPoolExecutor {
     /**
      * 任务阻塞队列
      */
-    private final BlockingQueue<Task> workQueue;
+    private final BlockingQueue<Runnable> workQueue;
 
     /**
      * 记录目前运行的线程数
@@ -36,7 +36,7 @@ public class SimpleThreadPoolExecutor {
         workQueue = new  LinkedBlockingQueue<>();
     }
 
-    public SimpleThreadPoolExecutor(int threadSize,int maximumPoolSize,BlockingQueue<Task> workQueue) {
+    public SimpleThreadPoolExecutor(int threadSize,int maximumPoolSize,BlockingQueue<Runnable> workQueue) {
         this.threadSize = threadSize;
         this.maximumPoolSize = maximumPoolSize;
         this.workQueue = workQueue;
@@ -47,7 +47,7 @@ public class SimpleThreadPoolExecutor {
      * 新建线程和添加任务
      * @param task
      */
-    public void execute(Task task) {
+    public void execute(Runnable task) {
 
         //判断当前线程，是否启动到最大。（threadSize）
         if (threadCount.get() < threadSize) {
@@ -89,8 +89,8 @@ public class SimpleThreadPoolExecutor {
                 while (true) {
                     try {
                         //没有任务就阻塞,这里用BlockingQueue，具体看你传递过来的类型。
-                        Task task = workQueue.take();
-                        System.out.println("workQueue size:"+workQueue.size() + "::" + getName() + "--:" + task.tag);
+                        Runnable task = workQueue.take();
+                        System.out.println("workQueue size:"+workQueue.size() + "::" + getName() + "--:" + task.toString());
                         //模拟处理任务，和耗时。
                         task.run();
 
@@ -112,7 +112,7 @@ public class SimpleThreadPoolExecutor {
      *remove task
      * @param obj 任务
      */
-    public void removeTask(Task obj) {
+    public void removeTask(Runnable obj) {
         workQueue.remove(obj);
     }
 

@@ -14,14 +14,11 @@ public class SimulationThreadTest {
 
         SimpleThreadPoolExecutor executor=new SimpleThreadPoolExecutor(3,10,new LinkedBlockingQueue<>());
         //添加一个任务
-        executor.execute(new Task("first 1"){
-            @Override
-            public void run() {
-                super.run();
-                //模拟耗时处理任务
-                processTask();
+        executor.execute(() -> {
 
-            }
+            //模拟耗时处理任务
+            processTask();
+
         });
 
         //这一步，只这为了模拟生产任务。
@@ -41,14 +38,9 @@ public class SimulationThreadTest {
                 try {
 
                     while (true) {
-                        executor.execute(new Task("count:" + count++){
-
-                            @Override
-                            public void run() {
-                                super.run();
-                               // 模拟处理任务
-                                processTask();
-                            }
+                        executor.execute(() -> {
+                           // 模拟处理任务
+                            processTask();
                         });
                         sleep(1000);
                         System.out.println("--生产--");
