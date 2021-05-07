@@ -313,41 +313,6 @@ public class AlgorithmTest {
 
     }
 
-    private static int  binarySearch2(int  [] array,int key){
-
-        int size= array.length;
-
-        int low=0;
-        int high=size-1;
-        //     System.out.println("\n-----二分查找 size------"+size);
-
-        for(int i=0;i<size;i++){
-
-            System.out.println("\n-----二分查找-low---high--"+low+"--"+high);
-
-            int mid=(low+high)/2;
-
-            System.out.println("-----二分查找-当前中位数-----"+array[mid]);
-            //如果key大于中位数,从右边找
-            if(array[mid]<key){
-                low=mid+1;
-
-            }
-            //如果key小于中位数,从左边找
-            else if (array[mid]>key){
-                high=mid-1;
-            }else {
-                //找到了
-
-                return array[mid];
-            }
-
-
-        }
-
-        System.out.println("\n-----二分查找:没找到------");
-        return 0;
-    }
 
 
     private static void printArray(int[] sort){
