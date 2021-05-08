@@ -10,7 +10,8 @@ public class SearchTest {
 
         int[] array={0,1,2,4,5,6,7,8,9};
 
-      //  binarySearch2(array,-2);
+        binarySearch2(array,-2);
+
         int size=array.length;
         recursionBinarySearch2(array,-3,0,size-1);
         recursionBinarySearch2(array,10,0,size-1);
@@ -31,7 +32,7 @@ public class SearchTest {
     private static boolean  recursionBinarySearch2(int  [] array,int key,int low,int high){
 
 
-        System.out.println("-----low----:"+low+":"+high);
+        System.out.printf("\n-----二分查找---low:%s  high:%s \n",low,high);
         //前排判断是否小于数组的最小数，大于最大数。不存在中间里面 low>high，会像 3:2。
         if(key < array[low] || key > array[high]||low>high){
             System.out.println("-----------------------------没有找到----："+key);
@@ -39,42 +40,23 @@ public class SearchTest {
         }
 
         int mid=(low+high)/2;
-        System.out.println("-----mid----"+mid);
+        System.out.println("-----mid----:"+mid);
 
         //往右
         if(key>array[mid]){
             low=mid+1;
+            //开始套娃
            return recursionBinarySearch2(array,key,low,high);
         }else if (key<array[mid]){
             //往左
             high=mid-1;
+            //套娃
             return recursionBinarySearch2(array,key,low,high);
         }else {
-            System.out.println("-------------------------找到数值----"+array[mid]);
+            System.out.println("-------------------------找到数值----:"+array[mid]);
             return true;
         }
 
-    }
-    // 二分查找递归实现
-    public static int binSearch(int srcArray[], int key ,int start, int end) {
-        int mid = (end - start) / 2 + start;
-        if (srcArray[mid] == key) {
-            System.out.println("1----------------end-------------:"+start+":"+end);
-
-            return mid;
-        }
-        if (start >= end) {
-            System.out.println("2----------------end-------------:"+start+":"+end);
-
-            return -1;
-        } else if (key > srcArray[mid]) {
-            return binSearch(srcArray, mid + 1, end, key);
-        } else if (key < srcArray[mid]) {
-            return binSearch(srcArray, start, mid - 1, key);
-        }
-        System.out.println("3----------------end-------------:"+start+":"+end);
-
-        return -1;
     }
 
 
@@ -95,12 +77,12 @@ public class SearchTest {
         //System.out.println("\n-----二分查找 size------"+size);
 
             while (low<=high){
-                System.out.println("\n-----二分查找-low---high--"+low+"--"+high);
+                System.out.printf("\n-----二分查找-low:%s  high:%s \n",low,high);
 
                 //数组一分为二。
                 int mid=(low+high)/2;
 
-                System.out.println(mid+"-----二分查找-当前中位数-----"+array[mid]);
+                System.out.println(mid+"-----二分查找-当前中位数-----:"+array[mid]);
                 //如果key大于中位数,从右边找
                 if(array[mid]<key){
                     low=mid+1;
@@ -111,15 +93,14 @@ public class SearchTest {
                     high=mid-1;
                 }else {
                     //todo:找到了
-                    System.out.println("\n-----二分查找:找到------"+array[mid]);
+                    System.out.println("\n-----二分查找:找到------:"+array[mid]);
                     return true;
 
                 }
             }
 
 
-        System.out.println("\n-----二分查找:没找到------:"+low);
-        System.out.println("\n-----二分查找:没找到------:"+high);
+        System.out.printf("\n-----二分查找:没找到---low:%s  high:%s \n",low,high);
         return false;
     }
 
