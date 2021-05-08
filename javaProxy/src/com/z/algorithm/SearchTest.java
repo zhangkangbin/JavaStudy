@@ -8,10 +8,54 @@ public class SearchTest {
 
     public static void main(String[] args) {
 
-        int[] array={0,1,2,3,4,5,6,7,8,9};
+        int[] array={0,1,2,4,5,6,7,8,9};
 
-        binarySearch2(array,-1);
+      //  binarySearch2(array,-2);
+        int size=array.length;
+       recursionBinarySearch2(array,-3,0,size-1);
+        recursionBinarySearch2(array,10,0,size-1);
+        recursionBinarySearch2(array,0,0,size-1);
+        recursionBinarySearch2(array,5,0,size-1);
+        recursionBinarySearch2(array,9,0,size-1);
+        recursionBinarySearch2(array,3,0,size-1);
     }
+    /**
+     * 二分查找算法,递归版
+     * 元素必须是有序的，如果是无序的则要先进行排序操作。
+     * @param array 数组
+     * @param key 查找数
+     * @return 是否找到
+     */
+    private static boolean  recursionBinarySearch2(int  [] array,int key,int low,int high){
+
+
+        System.out.println("-----low----:"+low+":"+high);
+        //尽头 比如：小于数组所有的数 0:-1 ，大于数组里面的数10:9  ，不存在中间里面 3:2。
+        if(low>high){
+            System.out.println("-----------------------------没有找到----："+key);
+            return false;
+        }
+
+        int mid=(low+high)/2;
+        System.out.println("-----mid----"+mid);
+
+        //往右
+        if(key>array[mid]){
+            low=mid+1;
+            recursionBinarySearch2(array,key,low,high);
+        }else if (key<array[mid]){
+            //往左
+            high=mid-1;
+            recursionBinarySearch2(array,key,low,high);
+        }else {
+            System.out.println("-------------------------找到数值----"+array[mid]);
+            return true;
+        }
+
+        return false;
+
+    }
+
 
     /**
      * 二分查找算法
@@ -53,8 +97,11 @@ public class SearchTest {
             }
 
 
-        System.out.println("\n-----二分查找:没找到------"+low);
+        System.out.println("\n-----二分查找:没找到------:"+low);
+        System.out.println("\n-----二分查找:没找到------:"+high);
         return false;
     }
+
+
 
 }
