@@ -12,12 +12,14 @@ public class SearchTest {
 
       //  binarySearch2(array,-2);
         int size=array.length;
-       recursionBinarySearch2(array,-3,0,size-1);
+        recursionBinarySearch2(array,-3,0,size-1);
         recursionBinarySearch2(array,10,0,size-1);
+        recursionBinarySearch2(array,3,0,size-1);
+
         recursionBinarySearch2(array,0,0,size-1);
         recursionBinarySearch2(array,5,0,size-1);
         recursionBinarySearch2(array,9,0,size-1);
-        recursionBinarySearch2(array,3,0,size-1);
+
     }
     /**
      * 二分查找算法,递归版
@@ -30,8 +32,8 @@ public class SearchTest {
 
 
         System.out.println("-----low----:"+low+":"+high);
-        //尽头 比如：小于数组所有的数 0:-1 ，大于数组里面的数10:9  ，不存在中间里面 3:2。
-        if(low>high){
+        //前排判断是否小于数组的最小数，大于最大数。不存在中间里面 low>high，会像 3:2。
+        if(key < array[low] || key > array[high]||low>high){
             System.out.println("-----------------------------没有找到----："+key);
             return false;
         }
@@ -42,18 +44,37 @@ public class SearchTest {
         //往右
         if(key>array[mid]){
             low=mid+1;
-            recursionBinarySearch2(array,key,low,high);
+           return recursionBinarySearch2(array,key,low,high);
         }else if (key<array[mid]){
             //往左
             high=mid-1;
-            recursionBinarySearch2(array,key,low,high);
+            return recursionBinarySearch2(array,key,low,high);
         }else {
             System.out.println("-------------------------找到数值----"+array[mid]);
             return true;
         }
 
-        return false;
+    }
+    // 二分查找递归实现
+    public static int binSearch(int srcArray[], int key ,int start, int end) {
+        int mid = (end - start) / 2 + start;
+        if (srcArray[mid] == key) {
+            System.out.println("1----------------end-------------:"+start+":"+end);
 
+            return mid;
+        }
+        if (start >= end) {
+            System.out.println("2----------------end-------------:"+start+":"+end);
+
+            return -1;
+        } else if (key > srcArray[mid]) {
+            return binSearch(srcArray, mid + 1, end, key);
+        } else if (key < srcArray[mid]) {
+            return binSearch(srcArray, start, mid - 1, key);
+        }
+        System.out.println("3----------------end-------------:"+start+":"+end);
+
+        return -1;
     }
 
 
