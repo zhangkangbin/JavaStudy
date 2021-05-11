@@ -13,13 +13,17 @@ import java.util.Arrays;
  * https://blog.csdn.net/csdn_baotai/article/details/80293679#comments_15536540
  *
  * 排序的概念与分类
- * 直接插入排序，希尔排序，基数排序。
+ * 直接插入排序（已完成），希尔排序，基数排序。
  *
  * 哈希表的构造
  * 哈希表的实现
  *
  * 递归。
- * 折半查找 ，归并排序，快速排序。
+ * 递归函数的执行过程
+ * 折半查找 （已完成）
+ *
+ *
+ * 归并排序，快速排序。
  * 广义表定义（是一种非连续性的数据结构，是线性表的一种推广。），存储与实现。
  *
  * 二叉树
@@ -30,104 +34,14 @@ import java.util.Arrays;
  * 二叉平衡树。
  *
  * 树和森林
- *
+ *并查集
  *拓扑排序
  *
  */
 public class AlgorithmTest {
 
 
-    public static void mergeSort(int[] sourceArray,int low,int high){
 
-        // 对 arr 进行拷贝，不改变参数内容
-        int[] arr = sourceArray;
-        int length=arr.length;
-
-
-        if (length < 2) {
-          printArray(arr);
-        }
-
-        int middle = (low+high)/2;
-
-        int[] left = new int[middle];
-        int[] right = new int[high-middle];
-
-        //int[] arrayx=new int[10];
-
-
-
-
-       //return merge( mergeSort(left), mergeSort(right));
-
-    }
-
-    private static int[]  merge(int[] left,int[] right){
-
-
-        int[] result = new int[left.length + right.length];
-        int i = 0;
-
-        while (left.length > 0 && right.length > 0) {
-            if (left[0] <= right[0]) {
-                result[i++] = left[0];
-                left = Arrays.copyOfRange(left, 1, left.length);
-            } else {
-                result[i++] = right[0];
-                right = Arrays.copyOfRange(right, 1, right.length);
-            }
-        }
-
-        while (left.length > 0) {
-            result[i++] = left[0];
-            left = Arrays.copyOfRange(left, 1, left.length);
-        }
-
-        while (right.length > 0) {
-            result[i++] = right[0];
-            right = Arrays.copyOfRange(right, 1, right.length);
-        }
-
-        return result;
-    }
-
-
-    /**
-     * 冒泡
-     * @param a
-     */
-    public static void bubbleSort123(int[] a) {
-        int temp;
-        int size = a.length;
-        for (int i = 1; i < size; i++) {
-            for (int j = 0; j < size - i; j++) {
-
-
-                System.out.print(i+ " --"+j);
-                //大于
-                if (a[j] > a[j + 1]) {
-                    //保存二个比较中，最大的数值
-                    temp = a[j];
-                    //   System.out.println(temp);
-                    //交换双方位置
-                    // 数值小的数往前挪
-                    a[j] = a[j + 1];
-                    // 数值大的数往后挪
-                    a[j + 1] = temp;
-
-
-
-                    System.out.println(" ");
-                } else {
-            /*       for (int aSort : a) {
-                        System.out.print(aSort + " ,");
-                    }
-                    System.out.println(" ");*/
-                }
-            }
-
-        }
-    }
 
 
     /**
@@ -243,7 +157,6 @@ public class AlgorithmTest {
             minIndex = i;
 
             // int[] sort = {8,5,7, 6, 2};
-
             for(int j=i+1;j<size;j++){
            //    System.out.print(j);
                 //比较那个更小
@@ -316,6 +229,7 @@ public class AlgorithmTest {
 
 
     private static void printArray(int[] sort){
+
         for (int aSort : sort) {
             System.out.print(aSort + " ,");
         }
@@ -339,12 +253,13 @@ public class AlgorithmTest {
 /*        System.out.println("\n-----选择排序------");
         selectionSort(sort);*/
 
-        System.out.println("\n-----插入排序------");
-        insertSort();
+/*        System.out.println("\n-----插入排序------");
+        insertSort();*/
 
     /*    int[] array = {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15};
         binarySearch2(array,13);*/
       //  binarySearch2(array,1);
+
 
     }
 
