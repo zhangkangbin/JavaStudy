@@ -39,6 +39,10 @@ public class MergeTest  extends BaseAlgorithm{
         int j = mid+1;
         int k = 0;
 
+        /**
+         * i 控制左边下标，不要超出mid，mid是切分后数组的中位数。
+         * j 控制右边下标,不要超出 right。right是切分后数组的长度。
+         */
         while(i<=mid&&j<=right){
 
             if (arr[i] < arr[j]) {
