@@ -33,7 +33,7 @@ public class SearchTest {
 
 
         System.out.printf("\n-----二分查找---low:%s  high:%s \n",low,high);
-        //前排判断是否小于数组的最小数，大于最大数。不存在中间里面 low>high，会像 3:2。
+        //前排判断是否小于数组的最小数，大于最大数。不存在中间里面 ,low>high，会变成 3>2,则跳出循环。
         if(key < array[low] || key > array[high]||low>high){
             System.out.println("-----------------------------没有找到----："+key);
             return false;
@@ -50,6 +50,8 @@ public class SearchTest {
         }else if (key<array[mid]){
             //往左
             high=mid-1;
+
+
             //套娃
             return recursionBinarySearch2(array,key,low,high);
         }else {
