@@ -19,6 +19,12 @@ public class StateCountTest {
     private static final int STOP       =  1 << COUNT_BITS;
     private static AtomicInteger ctl=new AtomicInteger(ctlOf(DEFAULT, 0));
 
+    /**
+     * 还原数值。
+     * @param rs
+     * @param wc
+     * @return
+     */
     private static int ctlOf(int rs, int wc) { return rs | wc; }
     /**
      *减少锁的竞争。
@@ -68,13 +74,15 @@ public class StateCountTest {
      */
     private static boolean changeState(int state) {
 
-        //修改状态值为stop
         return ctl.compareAndSet(ctl.get(), ctlOf(state, 0));
     }
 
     public static void main(String[] args) {
 
         System.out.printf("当前状态：%s \n",runStateOf(ctl.get()));
+
+
+
 
 
         changeState(STOP);

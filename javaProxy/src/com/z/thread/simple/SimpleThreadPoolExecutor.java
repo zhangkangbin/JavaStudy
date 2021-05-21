@@ -39,6 +39,7 @@ public class SimpleThreadPoolExecutor {
     public SimpleThreadPoolExecutor(int threadSize,int maximumPoolSize,BlockingQueue<Runnable> workQueue) {
         this.threadSize = threadSize;
         this.maximumPoolSize = maximumPoolSize;
+
         this.workQueue = workQueue;
 
     }
