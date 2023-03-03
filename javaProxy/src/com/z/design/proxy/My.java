@@ -13,8 +13,9 @@ public class My implements IUser {
     }
 
     @Override
-    public void findBoy() {
+    public My findBoy() {
         System.out.println("boy 佛系寻找：你若盛开，清风自来。");
+        return new My() ;
     }
 
 

@@ -14,5 +14,7 @@ public interface IUser {
     @MyAnnotation(value = "我是Girl的自定义注解")
     void findGirl();
     @MyAnnotation(value = "我是boy的自定义注解")
-    void findBoy();
+    My findBoy();
+
+
 }

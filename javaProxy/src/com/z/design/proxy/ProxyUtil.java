@@ -8,6 +8,9 @@ import java.lang.annotation.Annotation;
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
+import java.util.ArrayDeque;
+import java.util.Collections;
+import java.util.Deque;
 
 /**
  * User: zhangkb
@@ -23,6 +26,33 @@ public class ProxyUtil {
      * @return
      */
     public <T> T getProxy(final  Class<T> cls) {
+
+        Class<?>[]  classes= cls.getInterfaces();
+
+        Method[] methods= cls.getDeclaredMethods();
+
+        for (Method m:methods){
+
+            System.out.println("method:"+m.getName());
+            System.out.println("method:"+m.toString());
+        }
+
+        Deque<Class<?>> check = new ArrayDeque<>(1);
+        check.add(cls);
+        while (!check.isEmpty()) {
+            Class<?> candidate = check.removeFirst();
+            if (candidate.getTypeParameters().length != 0) {
+                StringBuilder message =
+                        new StringBuilder("Type parameters are unsupported on ").append(candidate.getName());
+                if (candidate != cls) {
+                    message.append(" which is an interface of ").append(cls.getName());
+                }
+                throw new IllegalArgumentException(message.toString());
+            }
+            Collections.addAll(check, candidate.getInterfaces());
+        }
+
+
 
         return (T) Proxy.newProxyInstance(cls.getClassLoader(),
                 new Class[]{cls},
@@ -50,7 +80,13 @@ public class ProxyUtil {
 
 
                         System.out.println("匿名代理 end:我该做点什么？");
-                        return proxy;
+                        if(method.getReturnType() == My.class){
+                            System.out.println("匿名代理 end:My.class？");
+                        }
+                        if(method.getReturnType() == MyProxy.class){
+                            System.out.println("匿名代理 end:MyProxy.class？");
+                        }
+                        return new My();
 
 
                     }

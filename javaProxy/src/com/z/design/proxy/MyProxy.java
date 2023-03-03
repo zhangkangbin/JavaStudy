@@ -28,9 +28,11 @@ public class MyProxy implements IUser {
     }
 
     @Override
-    public void findBoy() {
+    public My findBoy() {
         System.out.println("findBoy start");
         iUser.findBoy();
         System.out.println("findBoy end");
+
+        return new My();
     }
 }

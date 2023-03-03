@@ -16,12 +16,13 @@ public class Main {
 
     public static void main(String[] args) {
 
-        System.out.println("------------静态代理------------");
+    /*    System.out.println("------------静态代理------------");
 
         //静态代理
         IUser myProxy = new MyProxy(new My());
         //MyProxy 代理 new My()
         myProxy.findGirl();
+        myProxy.findBoy();
 
 
         System.out.println("------------动态代理------------");
@@ -33,7 +34,7 @@ public class Main {
         IUser proxySubject = (IUser) Proxy.newProxyInstance(my.getClass().getClassLoader(),
                 my.getClass().getInterfaces(),
                 new MyProxyHandler<>(my));
-        proxySubject.findGirl();
+        proxySubject.findGirl();*/
 
 
         /**
@@ -50,8 +51,10 @@ public class Main {
         ProxyUtil proxyUtil = new ProxyUtil();
         IUser user = proxyUtil.getProxy(IUser.class);
         user.findBoy();
-        user.findGirl();
+     //   user.findGirl();
 
+  /*      IUser.IPeople users = proxyUtil.getProxy(IUser.IPeople.class);
+        users.findPeople();*/
 
     }
 

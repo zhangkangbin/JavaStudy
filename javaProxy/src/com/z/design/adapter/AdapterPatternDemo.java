@@ -1,6 +1,7 @@
 package com.z.design.adapter;
 
 /**
+ * 设配器模式
  * User: zhangkb
  * Date: 2019/5/13 0013
  * Time: 上午 9:44
