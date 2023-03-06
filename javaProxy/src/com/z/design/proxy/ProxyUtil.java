@@ -8,6 +8,7 @@ import java.lang.annotation.Annotation;
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
+import java.lang.reflect.Type;
 import java.util.ArrayDeque;
 import java.util.Collections;
 import java.util.Deque;
@@ -86,7 +87,18 @@ public class ProxyUtil {
                         if(method.getReturnType() == MyProxy.class){
                             System.out.println("匿名代理 end:MyProxy.class？");
                         }
-                        return new My();
+
+
+                        Type type= method.getGenericReturnType();
+
+                        if(type==My.class){
+
+                            return new My();
+                        }
+
+
+
+                        return new MyCall();
 
 
                     }
